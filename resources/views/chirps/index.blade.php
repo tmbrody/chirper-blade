@@ -21,6 +21,22 @@
                         <div class="flex justify-between items-center">
                             <div>
                                 <span class="text-gray-800">{{ $chirp->user->name }}</span>
+
+                                @if (!$chirp->user->is(auth()->user()) && !auth()->user()->following->contains($chirp->user->id))
+                                    <form method="POST" action="{{ route('follow.store', $chirp->user) }}">
+                                        @csrf
+                                        <x-primary-button>{{ __('Follow') }}</x-primary-button>
+                                    </form>
+                                @endif
+
+                                @if (auth()->user()->following->contains($chirp->user->id))
+                                    <form method="POST" action="{{ route('follow.destroy', $chirp->user) }}">
+                                        @csrf
+                                        @method('delete')
+                                        <x-primary-button>{{ __('Unfollow') }}</x-primary-button>
+                                    </form>
+                                @endif
+
                                 <small class="ml-2 text-sm text-gray-600">{{ $chirp->created_at->format('j M Y, g:i a') }}</small>
                                 @unless ($chirp->created_at->eq($chirp->updated_at))
                                     <small class="text-sm text-gray-600"> &middot; {{ __('edited') }}</small>

@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\ChirpController;
+use App\Http\Controllers\FollowController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -25,5 +26,8 @@ Route::get('/dashboard', function () {
 Route::resource('chirps', ChirpController::class)
     ->only(['index', 'store', 'edit', 'update', 'destroy'])
     ->middleware('auth', 'verified');
+
+Route::post('/follow/{user}', [FollowController::class, 'store'])->name('follow.store');
+Route::delete('/follow/{user}', [FollowController::class, 'destroy'])->name('follow.destroy');
 
 require __DIR__.'/auth.php';
