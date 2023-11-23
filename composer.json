@@ -1,8 +1,8 @@
 {
-    "name": "laravel/laravel",
+    "name": "tmbrody/chirper-blade",
     "type": "project",
-    "description": "The skeleton application for the Laravel framework.",
-    "keywords": ["laravel", "framework"],
+    "description": "CRUD server that uses chirps.",
+    "keywords": ["laravel", "blade", "chirps"],
     "license": "MIT",
     "require": {
         "php": "^8.1",
